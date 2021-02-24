@@ -14,9 +14,6 @@
 节点自定义： src/components/registerNode  
 节点面板：src/components/NodePanel.vue  
 
-### svg png 图片资源来自阿里字体库
-[阿里字体库](https://www.iconfont.cn/collections/index?spm=a313x.7781069.1998910419.4)
-
 ## Project setup
 ```
 yarn install

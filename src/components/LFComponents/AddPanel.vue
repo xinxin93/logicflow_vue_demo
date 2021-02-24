@@ -5,7 +5,7 @@
         <el-button class="add-node-btn" type="primary" size="mini" @click="$_addNode(item)">{{item.label}}</el-button>
       </div>
     </el-tab-pane>
-    <el-tab-pane label="添加Combo">
+    <el-tab-pane label="添加组">
       <el-button class="add-node-btn" type="primary" size="mini" @click="$_addTempalte">模板</el-button>
     </el-tab-pane>
   </el-tabs>
