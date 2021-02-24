@@ -1,0 +1,50 @@
+{
+	"nodes": [{
+		"id": "04f313c7-45a2-4fce-ad32-ba9f6c0a9f8c",
+		"type": "user",
+		"x": 340,
+		"y": 190,
+		"properties": {},
+		"baseType": "node"
+	}, {
+		"id": "4780aa07-839a-4d46-9c07-6bafd23e6bf5",
+		"type": "time",
+		"x": 530,
+		"y": 200,
+		"properties": {},
+		"baseType": "node"
+	}],
+	"edges": [{
+		"id": "db618c06-91be-478b-af52-3f46b9ff6fad",
+		"type": "polyline",
+		"sourceNodeId": "04f313c7-45a2-4fce-ad32-ba9f6c0a9f8c",
+		"targetNodeId": "4780aa07-839a-4d46-9c07-6bafd23e6bf5",
+		"startPoint": {
+			"x": 375,
+			"y": 190
+		},
+		"endPoint": {
+			"x": 495,
+			"y": 200
+		},
+		"properties": {},
+		"text": {
+			"x": 434,
+			"y": 190,
+			"value": "asdfasdf"
+		},
+		"pointsList": [{
+			"x": 375,
+			"y": 190
+		}, {
+			"x": 435,
+			"y": 190
+		}, {
+			"x": 435,
+			"y": 200
+		}, {
+			"x": 495,
+			"y": 200
+		}]
+	}]
+}
