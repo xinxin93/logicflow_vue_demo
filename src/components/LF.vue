@@ -60,6 +60,8 @@ import {
   registerPolyline,
 } from './registerNode'
 
+const demoData = require('./data.json')
+
 export default {
   name: 'LF',
    components: { NodePanel, AddPanel, Control, PropertyDialog, DataDialog },
@@ -83,7 +85,6 @@ export default {
   },
   methods: {
     $_initLf () {
-      const _this = this
       // 画布配置
       const config = {
         container: document.querySelector('#LF-view'),
@@ -107,7 +108,7 @@ export default {
             // 可以根据data数据判断是否允许删除，允许返回true,不允许返回false
             // 文档： http://logic-flow.org/guide/basic/keyboard.html#%E5%A6%82%E4%BD%95%E9%98%BB%E6%AD%A2%E5%88%A0%E9%99%A4%E6%88%96%E8%80%85%E6%8B%B7%E8%B4%9D%E8%A1%8C%E4%B8%BA
             console.log('beforeDelete', data)
-            _this.$message('不允许删除', 'error')
+            // _this.$message('不允许删除', 'error')
             return true
           }
         }
@@ -202,7 +203,7 @@ export default {
       this.$_render()
     },
     $_render () {
-      this.lf.render()
+      this.lf.render(demoData)
       this.$_LfEvent()
     },
     $_getData () {
