@@ -14,6 +14,7 @@
 节点自定义： src/components/registerNode  
 节点面板：src/components/NodePanel.vue  
 
+logic Flow 详细内容参照[【文档】](http://logic-flow.org/)
 ## Project setup
 ```
 yarn install

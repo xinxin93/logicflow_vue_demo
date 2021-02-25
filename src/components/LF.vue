@@ -1,9 +1,13 @@
 <template>
   <div class="logic-flow-view">
     <h3 class="demo-title">LogicFlow Vue demo</h3>
+    <!-- 辅助工具栏 -->
     <Control class="demo-control" v-if="lf" :lf="lf" @catData="$_catData"></Control>
+    <!-- 节点面板 -->
     <NodePanel :lf="lf"></NodePanel>
+    <!-- 画布 -->
     <div id="LF-view"></div>
+    <!-- 用户节点自定义操作面板 -->
     <AddPanel
       v-if="showAddPanel"
       class="add-panel"
@@ -13,6 +17,7 @@
       @addNodeFinish="hideAddPanel"
       >
     </AddPanel>
+    <!-- 属性面板 -->
     <el-drawer
       title="设置节点属性"
       :visible.sync="dialogVisible"
@@ -26,6 +31,7 @@
         @setPropertiesFinish="closeDialog"
       ></PropertyDialog>
     </el-drawer>
+    <!-- 数据查看面板 -->
     <el-dialog
       title="数据"
       :visible.sync="dataVisible"
@@ -51,7 +57,7 @@ import {
   registerEnd,
   registerPush,
   registerDownload,
-  // registerPolyline
+  registerPolyline,
 } from './registerNode'
 
 export default {
@@ -78,6 +84,7 @@ export default {
   methods: {
     $_initLf () {
       const _this = this
+      // 画布配置
       const config = {
         container: document.querySelector('#LF-view'),
         background: {
@@ -105,6 +112,7 @@ export default {
           }
         }
       }
+      // 使用插件
       LogicFlow.use(Menu)
       LogicFlow.use(Snapshot)
       const lf = new LogicFlow({...config})
@@ -183,13 +191,14 @@ export default {
       })
       this.$_registerNode()
     },
+    // 自定义
     $_registerNode () {
       registerStart(this.lf)
       registerUser(this.lf)
       registerEnd(this.lf)
       registerPush(this.lf, this.clickPlus, this.mouseDownPlus)
       registerDownload(this.lf)
-      // registerPolyline(this.lf)
+      registerPolyline(this.lf)
       this.$_render()
     },
     $_render () {
