@@ -5,6 +5,11 @@
       "type": "start",
       "x": 220,
       "y": 170,
+      "text": {
+        "x": 350,
+        "y": 190,
+        "value": "sdfasf"
+      },
       "properties": {},
       "baseType": "node"
     },

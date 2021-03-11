@@ -1,6 +1,10 @@
 <template>
   <div class="logic-flow-view">
     <h3 class="demo-title">LogicFlow Vue demo</h3>
+    <el-button @click="goto">测试</el-button>
+    <el-button @click="$_changeFlow(1)">流程切换1</el-button>
+    <el-button @click="$_changeFlow(2)">流程切换2</el-button>
+    <div>{{JSON.stringify(this.nodeData)}}</div>
     <!-- 辅助工具栏 -->
     <Control class="demo-control" v-if="lf" :lf="lf" @catData="$_catData"></Control>
     <!-- 节点面板 -->
@@ -41,7 +45,8 @@
   </div>
 </template>
 <script>
-import LogicFlow from '@logicflow/core'
+// import LogicFlow from '@logicflow/core'
+const LogicFlow = window.LogicFlow
 import { Menu, Snapshot } from '@logicflow/extension'
 import '@logicflow/core/dist/style/index.css'
 import '@logicflow/extension/lib/style/index.css'
@@ -59,8 +64,8 @@ import {
   registerDownload,
   registerPolyline,
 } from './registerNode'
-
-const demoData = require('./data.json')
+const demoData = require('./data4.json')
+const demoData1 = require('./data4.json')
 
 export default {
   name: 'LF',
@@ -73,21 +78,13 @@ export default {
         top: 0,
         left: 0
       },
+      nodeData: null,
       addClickNode: null,
       clickNode: null,
       dialogVisible: false,
       graphData: null,
       dataVisible: false,
-    }
-  },
-  mounted () {
-    this.$_initLf()
-  },
-  methods: {
-    $_initLf () {
-      // 画布配置
-      const config = {
-        container: document.querySelector('#LF-view'),
+      config: {
         background: {
           color: '#f7f9ff'
         },
@@ -98,66 +95,85 @@ export default {
         keyboard: {
           enabled: true
         },
-        edgeTextDraggable: true,
-        guards: {
-          beforeClone (data) {
-            console.log('beforeClone', data)
-            return true
+        style: {
+          rect: {
+            radius: 6,
           },
-          beforeDelete (data) {
-            // 可以根据data数据判断是否允许删除，允许返回true,不允许返回false
-            // 文档： http://logic-flow.org/guide/basic/keyboard.html#%E5%A6%82%E4%BD%95%E9%98%BB%E6%AD%A2%E5%88%A0%E9%99%A4%E6%88%96%E8%80%85%E6%8B%B7%E8%B4%9D%E8%A1%8C%E4%B8%BA
-            console.log('beforeDelete', data)
-            // _this.$message('不允许删除', 'error')
-            return true
-          }
-        }
+          edgeText: { // 边文本样式
+            background: {
+              fill: '#fff'
+            }
+          },
+        },
+        edgeTextDraggable: true,
+        // guards: {
+        //   beforeClone (data) {
+        //     console.log('beforeClone', data)
+        //     return true
+        //   },
+        //   beforeDelete (data) {
+        //     // 可以根据data数据判断是否允许删除，允许返回true,不允许返回false
+        //     // 文档： http://logic-flow.org/guide/basic/keyboard.html#%E5%A6%82%E4%BD%95%E9%98%BB%E6%AD%A2%E5%88%A0%E9%99%A4%E6%88%96%E8%80%85%E6%8B%B7%E8%B4%9D%E8%A1%8C%E4%B8%BA
+        //     console.log('beforeDelete', data)
+        //     // _this.$message('不允许删除', 'error')
+        //     return true
+        //   }
+        // }
       }
+    }
+  },
+  mounted () {
+    this.$_initLf()
+  },
+  methods: {
+    $_initLf () {
+      // 画布配置
+      
       // 使用插件
       LogicFlow.use(Menu)
       LogicFlow.use(Snapshot)
-      const lf = new LogicFlow({...config})
+      const lf = new LogicFlow({...this.config, container: document.querySelector('#LF-view'),})
       this.lf = lf
       // 菜单配置文档：http://logic-flow.org/guide/extension/extension-components.html#%E8%8F%9C%E5%8D%95
       // 重置，增加，节点自由配置(以user节点为示例)
-      lf.setMenuConfig({
-        nodeMenu: [],
-        edgeMenu: []
-      })
-      lf.addMenuConfig({
-        nodeMenu: [
-          {
-            text: '分享',
-            callback () {
-              alert('分享成功！')
-            }
-          },
-          {
-            text: '属性',
-            callback (node) {
-              alert(`
-                节点id：${node.id}
-                节点类型：${node.type}
-                节点坐标：(x: ${node.x}, y: ${node.y})`
-              )
-            }
-          }
-        ],
-        edgeMenu: [
-          {
-            text: '属性',
-            callback (edge) {
-              alert(`
-                边id：${edge.id}
-                边类型：${edge.type}
-                边坐标：(x: ${edge.x}, y: ${edge.y})
-                源节点id：${edge.sourceNodeId}
-                目标节点id：${edge.targetNodeId}`
-              )
-            }
-          }
-        ]
-      })
+      // lf.setMenuConfig({
+      //   nodeMenu: [],
+      //   edgeMenu: []
+      // })
+      // lf.addMenuConfig({
+      //   nodeMenu: [
+      //     {
+      //       text: '分享',
+      //       callback () {
+      //         alert('分享成功！')
+      //       }
+      //     },
+      //     {
+      //       text: '属性',
+      //       callback (node) {
+      //         alert(`
+      //           节点id：${node.id}
+      //           节点类型：${node.type}
+      //           节点坐标：(x: ${node.x}, y: ${node.y})`
+      //         )
+      //       }
+      //     }
+      //   ],
+      //   edgeMenu: [
+      //     {
+      //       text: '属性',
+      //       callback (edge) {
+      //         alert(`
+      //           边id：${edge.id}
+      //           边类型：${edge.type}
+      //           边坐标：(x: ${edge.x}, y: ${edge.y})
+      //           源节点id：${edge.sourceNodeId}
+      //           目标节点id：${edge.targetNodeId}`
+      //         )
+      //       }
+      //     }
+      //   ]
+      // })
       // 设置主题
       lf.setTheme({
         circle: {
@@ -216,6 +232,10 @@ export default {
         this.$data.clickNode = data
         this.$data.dialogVisible = true
       })
+      this.lf.on('node:mousemove', ({data}) => {
+        console.log('node:mousemove', data)
+        this.nodeData = data
+      })
       this.lf.on('edge:click', ({data}) => {
         console.log('edge:click', data)
          this.$data.clickNode = data
@@ -223,6 +243,12 @@ export default {
       })
       this.lf.on('element:click', () => {
         this.hideAddPanel()
+      })
+      this.lf.on('edge:add', ({data}) => {
+        console.log('edge:add', data)
+      })
+      this.lf.on('node:mousemove', () => {
+        console.log('node:mousemove')
       })
       this.lf.on('blank:click', () => {
         this.hideAddPanel()
@@ -263,6 +289,16 @@ export default {
      $_catData(){
       this.$data.graphData = this.$data.lf.getGraphData();
       this.$data.dataVisible = true;
+    },
+    $_changeFlow(flow){
+      if (flow === 1) {
+        this.lf.render(demoData)
+      } else {
+        this.lf.render(demoData1)
+      }
+    },
+    goto () {
+      this.$router.push('/test')
     }
   }
 }

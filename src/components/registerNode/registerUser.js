@@ -81,10 +81,10 @@ export default function registerUser (lf) {
         this.menu = [
           {
             className: 'lf-menu-delete',
-            icon: true,
+            text: 'delete',
             callback (node) {
-              const comfirm = window.confirm('你确定要删除吗？')
-              comfirm && lf.deleteNode(node.id)
+              // const comfirm = window.confirm('你确定要删除吗？')
+              lf.deleteNode(node.id)
             }
           },
           {

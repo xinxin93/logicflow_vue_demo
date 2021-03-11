@@ -1,0 +1,89 @@
+{
+  "nodes": [
+    {
+      "id": "7a346a64-6384-4429-b7f2-8ccc6863fea0",
+      "type": "rect",
+      "x": 225,
+      "y": 180,
+      "properties": {
+        "des": "",
+        "add_date": "2021-03-04 15:29:16",
+        "src_service_name": "wj-bps",
+        "last_heartbeat_time": 1614853198088,
+        "name": "测试任务01",
+        "sort": 0,
+        "task_type": 91,
+        "state_code": 0,
+        "update_date": "2021-03-04 18:19:58",
+        "_id": 2310
+      },
+      "baseType": "node",
+      "text": {
+        "x": 225,
+        "y": 180,
+        "value": "测试任务01"
+      }
+    },
+    {
+      "id": "16b68f92-ebf5-4eba-9cb8-41cd858a95ae",
+      "type": "rect",
+      "x": 615,
+      "y": 240,
+      "properties": {
+        "des": "",
+        "add_date": "2021-03-04 15:29:16",
+        "src_service_name": "wj-bps",
+        "last_heartbeat_time": 1614853198088,
+        "name": "测试任务02",
+        "sort": 0,
+        "task_type": 92,
+        "state_code": 0,
+        "update_date": "2021-03-04 18:19:58",
+        "_id": 2311
+      },
+      "baseType": "node",
+      "text": {
+        "x": 615,
+        "y": 240,
+        "value": "测试任务02"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "5e4c8003-85ca-4463-a029-6cd27deec307",
+      "type": "polyline",
+      "sourceNodeId": "7a346a64-6384-4429-b7f2-8ccc6863fea0",
+      "targetNodeId": "16b68f92-ebf5-4eba-9cb8-41cd858a95ae",
+      "startPoint": {
+        "x": 395,
+        "y": 105
+      },
+      "endPoint": {
+        "x": 565,
+        "y": 240
+      },
+      "properties": {
+        "_id": 10893
+      },
+      "pointsList": [
+        {
+          "x": 395,
+          "y": 105
+        },
+        {
+          "x": 535,
+          "y": 105
+        },
+        {
+          "x": 535,
+          "y": 240
+        },
+        {
+          "x": 565,
+          "y": 240
+        }
+      ]
+    }
+  ]
+}

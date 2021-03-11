@@ -50,14 +50,25 @@ export default {
           text: '结束',
           class: 'node-end'
         }
-      ]
+      ],
+      node: {
+        type: 'rect',
+        property: {
+          a: 'efrwe',
+          b: 'wewe'
+        }
+      },
+      properties: {
+        a: 'efrwe',
+        b: 'wewe'
+      }
     }
   },
   methods: {
     $_dragNode (item) {
       this.$props.lf.dnd.startDrag({
         type: item.type,
-        text: item.label
+        properties: this.$data.properties
       })
     }
   }
