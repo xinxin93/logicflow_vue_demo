@@ -877,26 +877,17 @@
     cssnano-preset-default "^4.0.0"
     postcss "^7.0.0"
 
-"@logicflow/core@^0.2.4":
-  version "0.2.4"
-  resolved "https://registry.yarnpkg.com/@logicflow/core/-/core-0.2.4.tgz#e6b9bac437f12eab3512e7659b2dba5b84425b96"
-  integrity sha512-LkaXP9HvKR6ihnP1/33z963wPJvzy31nS1GymXaiphyoj4lBU40XndQRQ8dGJFHI07DfcPtd9wEU37UEj3N8eA==
-  dependencies:
-    ids "^1.0.0"
-    lodash-es "^4.17.15"
-    mobx "^5.15.7"
-    mobx-react "^6.3.0"
-    mobx-utils "^5.6.1"
-    mousetrap "^1.6.5"
-    preact "^10.4.8"
-    uuid "^8.2.0"
+"@logicflow/core@^0.2.9":
+  version "0.2.9"
+  resolved "https://registry.yarnpkg.com/@logicflow/core/-/core-0.2.9.tgz#c1353c3d5d0fe7c40d9bb8cfabe3cc6d5985e4f1"
+  integrity sha512-kT13SstugI5Ykdkz+awHvFAGP3V0N7P6reWrbmeyrdKoH9z1VfqkX3y6wRymmB+0kTeq6gS8C5cIfT6ks/ct9w==
 
-"@logicflow/extension@^0.2.4":
-  version "0.2.4"
-  resolved "https://registry.yarnpkg.com/@logicflow/extension/-/extension-0.2.4.tgz#028f82b3cc5afb7fcb20da845b473779707d8ac8"
-  integrity sha512-HEsloPZrc1wTRHvBGwgqGcT5YWNWzOfbBDRfVzqN1JgpCzOTIMBRJ/6dPoTyzkUvTs43Ag8vM6iiSgHwxy0zWA==
+"@logicflow/extension@^0.2.9":
+  version "0.2.9"
+  resolved "https://registry.yarnpkg.com/@logicflow/extension/-/extension-0.2.9.tgz#c82d697b4be8096d382726de8752114c4cfb924c"
+  integrity sha512-w0qkXQ82iVXM1nGFHPamlzIf/iHmYuvlk+pPyb7PUp0WYxfOV0Oi2skmPQpY9vktThRlIkUw53YBJtcRRIWyrg==
   dependencies:
-    "@logicflow/core" "^0.2.4"
+    "@logicflow/core" "^0.2.9"
     ids "^1.0.0"
 
 "@mrmlnc/readdir-enhanced@^2.2.1":
@@ -5152,11 +5143,6 @@ locate-path@^5.0.0:
   dependencies:
     p-locate "^4.1.0"
 
-lodash-es@^4.17.15:
-  version "4.17.21"
-  resolved "https://registry.yarnpkg.com/lodash-es/-/lodash-es-4.17.21.tgz#43e626c46e6591b7750beb2b50117390c609e3ee"
-  integrity sha512-mKnC+QJ9pWVzv+C4/U3rRsHapFfHvQFoFB92e52xeyGMcX6/OlIl78je1u8vePzYZSkkogMPJ2yjxxsb89cxyw==
-
 lodash.defaultsdeep@^4.6.1:
   version "4.6.1"
   resolved "https://registry.npm.taobao.org/lodash.defaultsdeep/download/lodash.defaultsdeep-4.6.1.tgz#512e9bd721d272d94e3d3a63653fa17516741ca6"
@@ -5467,33 +5453,6 @@ mkdirp@^0.5.1, mkdirp@^0.5.3, mkdirp@^0.5.5, mkdirp@~0.5.1:
   integrity sha1-2Rzv1i0UNsoPQWIOJRKI1CAJne8=
   dependencies:
     minimist "^1.2.5"
-
-mobx-react-lite@^2.2.0:
-  version "2.2.2"
-  resolved "https://registry.yarnpkg.com/mobx-react-lite/-/mobx-react-lite-2.2.2.tgz#87c217dc72b4e47b22493daf155daf3759f868a6"
-  integrity sha512-2SlXALHIkyUPDsV4VTKVR9DW7K3Ksh1aaIv3NrNJygTbhXe2A9GrcKHZ2ovIiOp/BXilOcTYemfHHZubP431dg==
-
-mobx-react@^6.3.0:
-  version "6.3.1"
-  resolved "https://registry.yarnpkg.com/mobx-react/-/mobx-react-6.3.1.tgz#204f9756e42e19d91cb6598837063b7e7de87c52"
-  integrity sha512-IOxdJGnRSNSJrL2uGpWO5w9JH5q5HoxEqwOF4gye1gmZYdjoYkkMzSGMDnRCUpN/BNzZcFoMdHXrjvkwO7KgaQ==
-  dependencies:
-    mobx-react-lite "^2.2.0"
-
-mobx-utils@^5.6.1:
-  version "5.6.2"
-  resolved "https://registry.yarnpkg.com/mobx-utils/-/mobx-utils-5.6.2.tgz#4858acbdb03f0470e260854f87e8c2ba916ebaec"
-  integrity sha512-a/WlXyGkp6F12b01sTarENpxbmlRgPHFyR1Xv2bsSjQBm5dcOtd16ONb40/vOqck8L99NHpI+C9MXQ+SZ8f+yw==
-
-mobx@^5.15.7:
-  version "5.15.7"
-  resolved "https://registry.yarnpkg.com/mobx/-/mobx-5.15.7.tgz#b9a5f2b6251f5d96980d13c78e9b5d8d4ce22665"
-  integrity sha512-wyM3FghTkhmC+hQjyPGGFdpehrcX1KOXsDuERhfK2YbJemkUhEB+6wzEN639T21onxlfYBmriA1PFnvxTUhcKw==
-
-mousetrap@^1.6.5:
-  version "1.6.5"
-  resolved "https://registry.yarnpkg.com/mousetrap/-/mousetrap-1.6.5.tgz#8a766d8c272b08393d5f56074e0b5ec183485bf9"
-  integrity sha512-QNo4kEepaIBwiT8CDhP98umTetp+JNfQYBWvC1pc6/OAibuXtRcxZ58Qz8skvEHYvURne/7R8T5VoOI7rDsEUA==
 
 move-concurrently@^1.0.1:
   version "1.0.1"
@@ -6540,11 +6499,6 @@ postcss@^7.0.0, postcss@^7.0.1, postcss@^7.0.14, postcss@^7.0.27, postcss@^7.0.3
     chalk "^2.4.2"
     source-map "^0.6.1"
     supports-color "^6.1.0"
-
-preact@^10.4.8:
-  version "10.5.12"
-  resolved "https://registry.yarnpkg.com/preact/-/preact-10.5.12.tgz#6a8ee8bf40a695c505df9abebacd924e4dd37704"
-  integrity sha512-r6siDkuD36oszwlCkcqDJCAKBQxGoeEGytw2DGMD5A/GGdu5Tymw+N2OBXwvOLxg6d1FeY8MgMV3cc5aVQo4Cg==
 
 prelude-ls@~1.1.2:
   version "1.1.2"
@@ -8110,11 +8064,6 @@ uuid@^3.3.2, uuid@^3.4.0:
   version "3.4.0"
   resolved "https://registry.npm.taobao.org/uuid/download/uuid-3.4.0.tgz#b23e4358afa8a202fe7a100af1f5f883f02007ee"
   integrity sha1-sj5DWK+oogL+ehAK8fX4g/AgB+4=
-
-uuid@^8.2.0:
-  version "8.3.2"
-  resolved "https://registry.yarnpkg.com/uuid/-/uuid-8.3.2.tgz#80d5b5ced271bb9af6c445f21a1a04c606cefbe2"
-  integrity sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg==
 
 v8-compile-cache@^2.0.3:
   version "2.2.0"

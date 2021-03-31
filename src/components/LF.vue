@@ -1,14 +1,16 @@
 <template>
   <div class="logic-flow-view">
     <h3 class="demo-title">LogicFlow Vue demo</h3>
-    <el-button @click="goto">测试</el-button>
-    <el-button @click="$_changeFlow(1)">流程切换1</el-button>
-    <el-button @click="$_changeFlow(2)">流程切换2</el-button>
-    <div>{{JSON.stringify(this.nodeData)}}</div>
     <!-- 辅助工具栏 -->
-    <Control class="demo-control" v-if="lf" :lf="lf" @catData="$_catData"></Control>
+    <Control 
+      class="demo-control"
+      v-if="lf"
+      :lf="lf"
+      @catData="$_catData"
+      @catTurboData="$_catTurboData"
+    ></Control>
     <!-- 节点面板 -->
-    <NodePanel :lf="lf"></NodePanel>
+    <NodePanel v-if="lf" :lf="lf" :nodeList="nodeList"></NodePanel>
     <!-- 画布 -->
     <div id="LF-view"></div>
     <!-- 用户节点自定义操作面板 -->
@@ -42,11 +44,14 @@
       width="50%">
       <DataDialog :graphData="graphData"></DataDialog>
     </el-dialog>
+    <h4>更多示例：
+      <el-button type="text" @click="goto">BpmnElement & TurboAdpter</el-button>
+    </h4>
   </div>
 </template>
 <script>
-// import LogicFlow from '@logicflow/core'
-const LogicFlow = window.LogicFlow
+import LogicFlow from '@logicflow/core'
+// const LogicFlow = window.LogicFlow
 import { Menu, Snapshot } from '@logicflow/extension'
 import '@logicflow/core/dist/style/index.css'
 import '@logicflow/extension/lib/style/index.css'
@@ -55,6 +60,7 @@ import AddPanel from './LFComponents/AddPanel'
 import Control from './LFComponents/Control'
 import PropertyDialog from './PropertySetting/PropertyDialog'
 import DataDialog from './LFComponents/DataDialog'
+import { nodeList } from './config'
 
 import {
   registerStart,
@@ -63,9 +69,9 @@ import {
   registerPush,
   registerDownload,
   registerPolyline,
+  registerTask,
 } from './registerNode'
-const demoData = require('./data4.json')
-const demoData1 = require('./data4.json')
+const demoData = require('./data.json')
 
 export default {
   name: 'LF',
@@ -106,20 +112,22 @@ export default {
           },
         },
         edgeTextDraggable: true,
-        // guards: {
-        //   beforeClone (data) {
-        //     console.log('beforeClone', data)
-        //     return true
-        //   },
-        //   beforeDelete (data) {
-        //     // 可以根据data数据判断是否允许删除，允许返回true,不允许返回false
-        //     // 文档： http://logic-flow.org/guide/basic/keyboard.html#%E5%A6%82%E4%BD%95%E9%98%BB%E6%AD%A2%E5%88%A0%E9%99%A4%E6%88%96%E8%80%85%E6%8B%B7%E8%B4%9D%E8%A1%8C%E4%B8%BA
-        //     console.log('beforeDelete', data)
-        //     // _this.$message('不允许删除', 'error')
-        //     return true
-        //   }
-        // }
-      }
+        guards: {
+          beforeClone (data) {
+            console.log('beforeClone', data)
+            return true
+          },
+          beforeDelete (data) {
+            // 可以根据data数据判断是否允许删除，允许返回true,不允许返回false
+            // 文档： http://logic-flow.org/guide/basic/keyboard.html#%E5%A6%82%E4%BD%95%E9%98%BB%E6%AD%A2%E5%88%A0%E9%99%A4%E6%88%96%E8%80%85%E6%8B%B7%E8%B4%9D%E8%A1%8C%E4%B8%BA
+            console.log('beforeDelete', data)
+            // _this.$message('不允许删除', 'error')
+            return true
+          }
+        }
+      },
+      moveData: {},
+      nodeList,
     }
   },
   mounted () {
@@ -134,6 +142,7 @@ export default {
       LogicFlow.use(Snapshot)
       const lf = new LogicFlow({...this.config, container: document.querySelector('#LF-view'),})
       this.lf = lf
+      lf.setDefaultEdgeType('bpmn:sequenceFlow');
       // 菜单配置文档：http://logic-flow.org/guide/extension/extension-components.html#%E8%8F%9C%E5%8D%95
       // 重置，增加，节点自由配置(以user节点为示例)
       // lf.setMenuConfig({
@@ -216,6 +225,7 @@ export default {
       registerPush(this.lf, this.clickPlus, this.mouseDownPlus)
       registerDownload(this.lf)
       registerPolyline(this.lf)
+      registerTask(this.lf)
       this.$_render()
     },
     $_render () {
@@ -232,10 +242,6 @@ export default {
         this.$data.clickNode = data
         this.$data.dialogVisible = true
       })
-      this.lf.on('node:mousemove', ({data}) => {
-        console.log('node:mousemove', data)
-        this.nodeData = data
-      })
       this.lf.on('edge:click', ({data}) => {
         console.log('edge:click', data)
          this.$data.clickNode = data
@@ -247,8 +253,9 @@ export default {
       this.lf.on('edge:add', ({data}) => {
         console.log('edge:add', data)
       })
-      this.lf.on('node:mousemove', () => {
+      this.lf.on('node:mousemove', ({data}) => {
         console.log('node:mousemove')
+        this.moveData = data
       })
       this.lf.on('blank:click', () => {
         this.hideAddPanel()
@@ -286,19 +293,12 @@ export default {
     closeDialog () {
       this.$data.dialogVisible = false
     },
-     $_catData(){
+    $_catData(){
       this.$data.graphData = this.$data.lf.getGraphData();
       this.$data.dataVisible = true;
     },
-    $_changeFlow(flow){
-      if (flow === 1) {
-        this.lf.render(demoData)
-      } else {
-        this.lf.render(demoData1)
-      }
-    },
     goto () {
-      this.$router.push('/test')
+      this.$router.push('/TurboAdpter')
     }
   }
 }

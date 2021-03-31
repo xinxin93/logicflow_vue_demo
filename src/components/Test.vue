@@ -1,6 +1,7 @@
 <template>
   <div>
     测试
+    <el-button @click="goto">流程</el-button>
   </div>
 </template>
 <script>
@@ -9,7 +10,11 @@ export default {
   data () {
     return {}
   },
-  methods: {}
+  methods: {
+    goto () {
+      this.$router.push('/')
+    }
+  }
 }
 </script>
 <style scoped>
