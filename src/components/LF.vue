@@ -142,7 +142,7 @@ export default {
       LogicFlow.use(Snapshot)
       const lf = new LogicFlow({...this.config, container: document.querySelector('#LF-view'),})
       this.lf = lf
-      lf.setDefaultEdgeType('bpmn:sequenceFlow');
+      // lf.setDefaultEdgeType('bpmn:sequenceFlow');
       // 菜单配置文档：http://logic-flow.org/guide/extension/extension-components.html#%E8%8F%9C%E5%8D%95
       // 重置，增加，节点自由配置(以user节点为示例)
       // lf.setMenuConfig({
