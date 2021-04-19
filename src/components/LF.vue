@@ -7,7 +7,6 @@
       v-if="lf"
       :lf="lf"
       @catData="$_catData"
-      @catTurboData="$_catTurboData"
     ></Control>
     <!-- 节点面板 -->
     <NodePanel v-if="lf" :lf="lf" :nodeList="nodeList"></NodePanel>
