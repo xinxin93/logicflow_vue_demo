@@ -1,7 +1,5 @@
 <template>
   <div>
-    <p>文案动态修改</p>
-    <el-input v-model="text" @input="textChange"></el-input>
     <el-form label-width="80px" :model="formData">
       <el-form-item label="文案">
         <el-input v-model="formData.text"></el-input>
@@ -61,39 +59,12 @@ export default {
   }, 
   methods: {
     onSubmit() {
-      console.log('submit!');
       const { id } = this.$props.nodeData
       this.$props.lf.setProperties(id, this.$data.formData);
-      // let data = this.$props.nodeData
-      // if (data.text) {
-      //   data.text.value = this.$data.formData.text;
-      //   data.text.x = 400
-
-      // } else {
-      //   data.text = this.$data.formData.text;
-      // }
-      // console.log(data)
-      // this.$props.lf.setEdgeData(data);
-      // const nodeData = this.$props.nodeData
-      // nodeData.properties = this.$data.formData
-      // console.log(JSON.parse(JSON.stringify(this.$data.formData)));
-      // console.log(nodeData);
-      // nodeData.text = {
-      //   x: nodeData.x,
-      //   y: nodeData.y + 35,
-      //   value: this.$data.formData.text,
-      //   editable: true,
-      // }
-      // this.$props.lf.setNodeData((nodeData));
       this.$emit('onClose')
     },
     textChange(value) {
-      console.log('--change----')
       const nodeData = this.$props.nodeData
-      console.log(nodeData);
-      // nodeData.properties = this.$data.formData
-      // console.log(JSON.parse(JSON.stringify(this.$data.formData)));
-      console.log(nodeData);
       nodeData.text = value
       this.$props.lf.setEdgeData(nodeData);
     }

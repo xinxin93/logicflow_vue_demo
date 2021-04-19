@@ -18,26 +18,10 @@ export default {
     lf: Object,
     nodeList: Array,
   },
-  data () {
-    return {
-      node: {
-        type: 'rect',
-        property: {
-          a: 'efrwe',
-          b: 'wewe'
-        }
-      },
-      properties: {
-        a: 'efrwe',
-        b: 'wewe'
-      }
-    }
-  },
   methods: {
     $_dragNode (item) {
       this.$props.lf.dnd.startDrag({
         type: item.type,
-        properties: this.$data.properties
       })
     }
   }
