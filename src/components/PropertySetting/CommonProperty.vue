@@ -61,13 +61,9 @@ export default {
     onSubmit() {
       const { id } = this.$props.nodeData
       this.$props.lf.setProperties(id, this.$data.formData);
+      this.$props.lf.updateText(id, this.$data.formData.text);
       this.$emit('onClose')
     },
-    textChange(value) {
-      const nodeData = this.$props.nodeData
-      nodeData.text = value
-      this.$props.lf.setEdgeData(nodeData);
-    }
   }
 }
 </script>
