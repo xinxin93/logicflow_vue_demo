@@ -25,6 +25,11 @@ export const nodeList = [
     class: 'node-download'
   },
   {
+    type: 'connect',
+    text: 'Html',
+    class: 'node-push'
+  },
+  {
     type: 'end',
     text: '结束',
     class: 'node-end'

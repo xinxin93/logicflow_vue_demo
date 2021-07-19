@@ -69,6 +69,7 @@ import {
   registerDownload,
   registerPolyline,
   registerTask,
+  registerConnect,
 } from './registerNode'
 const demoData = require('./data.json')
 
@@ -225,6 +226,7 @@ export default {
       registerDownload(this.lf)
       registerPolyline(this.lf)
       registerTask(this.lf)
+      registerConnect(this.lf)
       this.$_render()
     },
     $_render () {
