@@ -49,8 +49,8 @@
   </div>
 </template>
 <script>
-// import LogicFlow from '@logicflow/core'
-const LogicFlow = window.LogicFlow
+import LogicFlow from '@logicflow/core'
+// const LogicFlow = window.LogicFlow
 import { Menu, Snapshot } from '@logicflow/extension'
 import '@logicflow/core/dist/style/index.css'
 import '@logicflow/extension/lib/style/index.css'
