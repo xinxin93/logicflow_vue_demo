@@ -49,8 +49,8 @@
   </div>
 </template>
 <script>
-import LogicFlow from '@logicflow/core'
-// const LogicFlow = window.LogicFlow
+// import LogicFlow from '@logicflow/core'
+const LogicFlow = window.LogicFlow
 import { Menu, Snapshot } from '@logicflow/extension'
 import '@logicflow/core/dist/style/index.css'
 import '@logicflow/extension/lib/style/index.css'
@@ -69,6 +69,7 @@ import {
   registerDownload,
   registerPolyline,
   registerTask,
+  registerConnect,
 } from './registerNode'
 const demoData = require('./data.json')
 
@@ -225,6 +226,7 @@ export default {
       registerDownload(this.lf)
       registerPolyline(this.lf)
       registerTask(this.lf)
+      registerConnect(this.lf)
       this.$_render()
     },
     $_render () {

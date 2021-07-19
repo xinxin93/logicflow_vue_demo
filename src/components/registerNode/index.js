@@ -9,4 +9,5 @@ import registerPush from './registerPush'
 import registerDownload from './registerDownload'
 import registerPolyline from './registerPolyline'
 import registerTask from './registerTask'
-export { registerStart, registerUser, registerEnd, registerPush, registerDownload, registerPolyline, registerTask }
+import registerConnect from './registerConnect'
+export { registerStart, registerUser, registerEnd, registerPush, registerDownload, registerPolyline, registerTask, registerConnect }

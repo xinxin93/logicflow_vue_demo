@@ -60,7 +60,10 @@ export default {
   methods: {
     onSubmit() {
       const { id } = this.$props.nodeData
-      this.$props.lf.setProperties(id, this.$data.formData);
+      this.$props.lf.setProperties(id, {
+        ...this.$data.formData
+      });
+      console.log(6666, this.$data.formData);
       this.$props.lf.updateText(id, this.$data.formData.text);
       this.$emit('onClose')
     },
