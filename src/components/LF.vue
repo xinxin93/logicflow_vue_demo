@@ -65,7 +65,7 @@ import {
   registerPush,
   registerUser,
   registerDownload,
-  registerPolyline,
+  // registerPolyline,
   registerConnect,
 } from './registerNode'
 import { registerCustomElement } from './node'
@@ -184,7 +184,7 @@ export default {
       // })
       // 自定义节点
       registerCustomElement(lf)
-
+      lf.setDefaultEdgeType('polyline')
       // 设置主题
       lf.setTheme({
         circle: {
@@ -223,7 +223,7 @@ export default {
     $_registerNode () {
       registerPush(this.lf, this.clickPlus, this.mouseDownPlus)
       registerDownload(this.lf)
-      registerPolyline(this.lf)
+      // registerPolyline(this.lf)
       registerUser(this.lf)
       registerConnect(this.lf)
       this.$_render()

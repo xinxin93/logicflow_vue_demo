@@ -5,6 +5,6 @@
 import registerPush from './registerPush'
 import registerUser from './registerUser'
 import registerDownload from './registerDownload'
-import registerPolyline from './registerPolyline'
+// import registerPolyline from './registerPolyline'
 import registerConnect from './registerConnect'
-export { registerPush, registerUser, registerDownload, registerPolyline, registerConnect }
+export { registerPush, registerUser, registerDownload, registerConnect }
