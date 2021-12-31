@@ -62,20 +62,19 @@ import DataDialog from './LFComponents/DataDialog'
 import { nodeList } from './config'
 
 import {
-  registerStart,
-  registerUser,
-  registerEnd,
   registerPush,
+  registerUser,
   registerDownload,
   registerPolyline,
-  registerTask,
   registerConnect,
 } from './registerNode'
+import { registerCustomElement } from './node'
+
 const demoData = require('./data.json')
 
 export default {
   name: 'LF',
-   components: { NodePanel, AddPanel, Control, PropertyDialog, DataDialog },
+  components: { NodePanel, AddPanel, Control, PropertyDialog, DataDialog },
   data () {
     return {
       lf: null,
@@ -183,6 +182,9 @@ export default {
       //     }
       //   ]
       // })
+      // 自定义节点
+      registerCustomElement(lf)
+
       // 设置主题
       lf.setTheme({
         circle: {
@@ -219,13 +221,10 @@ export default {
     },
     // 自定义
     $_registerNode () {
-      registerStart(this.lf)
-      registerUser(this.lf)
-      registerEnd(this.lf)
       registerPush(this.lf, this.clickPlus, this.mouseDownPlus)
       registerDownload(this.lf)
       registerPolyline(this.lf)
-      registerTask(this.lf)
+      registerUser(this.lf)
       registerConnect(this.lf)
       this.$_render()
     },
@@ -245,8 +244,8 @@ export default {
       })
       this.lf.on('edge:click', ({data}) => {
         console.log('edge:click', data)
-         this.$data.clickNode = data
-          this.$data.dialogVisible = true
+        this.$data.clickNode = data
+        this.$data.dialogVisible = true
       })
       this.lf.on('element:click', () => {
         this.hideAddPanel()
@@ -255,7 +254,7 @@ export default {
         console.log('edge:add', data)
       })
       this.lf.on('node:mousemove', ({data}) => {
-        console.log('node:mousemove')
+        // console.log('node:mousemove')
         this.moveData = data
       })
       this.lf.on('blank:click', () => {
@@ -268,7 +267,7 @@ export default {
         })
       })
       this.lf.on('node:mousemove', () => {
-        console.log('on mousemove')
+        // console.log('on mousemove')
       })
     },
     clickPlus (e, attributes) {
