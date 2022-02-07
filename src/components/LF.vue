@@ -2,7 +2,7 @@
   <div class="logic-flow-view">
     <h3 class="demo-title">LogicFlow Vue demo</h3>
     <!-- 辅助工具栏 -->
-    <Control 
+    <Control
       class="demo-control"
       v-if="lf"
       :lf="lf"
@@ -92,7 +92,7 @@ export default {
       dataVisible: false,
       config: {
         background: {
-          color: '#f7f9ff'
+          backgroundColor: '#f7f9ff',
         },
         grid: {
           size: 10,
@@ -112,6 +112,7 @@ export default {
           },
         },
         edgeTextDraggable: true,
+        hoverOutline: false,
         guards: {
           beforeClone (data) {
             console.log('beforeClone', data)
@@ -124,7 +125,7 @@ export default {
             // _this.$message('不允许删除', 'error')
             return true
           }
-        }
+        },
       },
       moveData: {},
       nodeList,
@@ -186,10 +187,9 @@ export default {
       // 设置主题
       lf.setTheme({
         circle: {
-          r: 20,
           stroke: '#000000',
+          strokeWidth: 1,
           outlineColor: '#88f',
-          strokeWidth: 1
         },
         rect: {
           outlineColor: '#88f',
@@ -213,7 +213,7 @@ export default {
           background: {
             fill: '#f7f9ff'
           }
-        }
+        },
       })
       this.$_registerNode()
     },

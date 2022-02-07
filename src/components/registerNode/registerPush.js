@@ -2,10 +2,10 @@ export default function registerPush (lf, clickPlus, mouseDownPlus) {
   lf.register('push', ({ PolygonNode, PolygonNodeModel, h }) => {
     class Node extends PolygonNode {
       getIconShape () {
-        const attributes = this.getAttributes()
+        const {model} = this.props
         const {
           stroke
-        } = attributes
+        } = model.getNodeStyle()
         return h(
           'svg',
           {
@@ -25,13 +25,13 @@ export default function registerPush (lf, clickPlus, mouseDownPlus) {
         )
       }
       getPulsShape () {
-        const attributes = this.getAttributes()
+        const {model} = this.props
         // 判断当前节点是否子节点
         const graphData = lf.getGraphData()
         const edges = graphData.edges
         let hasChildNode = false
         edges.some(item => {
-          if (item.sourceNodeId === attributes.id) {
+          if (item.sourceNodeId === model.id) {
             hasChildNode = true
             return true
           }
@@ -48,9 +48,9 @@ export default function registerPush (lf, clickPlus, mouseDownPlus) {
             height: 30,
             viewBox: '0 0 1024 1024',
             class: 'time-plus',
-            onClick: (e) => clickPlus(e, attributes),
-            onMousedown: (e) => mouseDownPlus(e, attributes),
-            onMouseUp: (e) => mouseDownPlus(e, attributes)
+            onClick: (e) => clickPlus(e, model),
+            onMousedown: (e) => mouseDownPlus(e, model),
+            onMouseUp: (e) => mouseDownPlus(e, model)
           },
           h(
             'path',
@@ -76,19 +76,15 @@ export default function registerPush (lf, clickPlus, mouseDownPlus) {
         )
       }
       getShape () {
-        const attributes = this.getAttributes()
+        const {model} = this.props
+        const {width, height, x, y, points} = model
         const {
-          width,
-          height,
-          x,
-          y,
           fill,
           fillOpacity,
           strokeWidth,
           stroke,
           strokeOpacity,
-          points
-        } = attributes
+        } = model.getNodeStyle()
         const transform = `matrix(1 0 0 1 ${x - width / 2} ${y - height / 2})`
         const pointsPath = points.map(point => point.join(',')).join(' ')
         return h(
