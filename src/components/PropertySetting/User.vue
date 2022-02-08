@@ -79,8 +79,7 @@ export default {
       // this.$props.lf.setProperties(id, this.$data.form);
       const nodeData = this.$props.nodeData
       nodeData.properties = this.$data.form
-      console.log(nodeData);
-      this.$props.lf.setNodeData(nodeData);
+      this.$props.lf.setProperties(nodeData.id, this.$data.form);
       this.$emit('onClose')
     }
   }

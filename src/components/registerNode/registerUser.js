@@ -2,10 +2,8 @@ export default function registerUser (lf) {
   lf.register('user', ({ PolygonNode, PolygonNodeModel, h }) => {
     class Node extends PolygonNode {
       getIconShape () {
-        const attributes = this.getAttributes()
-        const {
-          stroke
-        } = attributes
+        const {model} = this.props
+        const {stroke} = model.getNodeStyle()
         return h(
           'svg',
           {
@@ -25,19 +23,9 @@ export default function registerUser (lf) {
         )
       }
       getShape () {
-        const attributes = this.getAttributes()
-        const {
-          width,
-          height,
-          x,
-          y,
-          fill,
-          fillOpacity,
-          strokeWidth,
-          stroke,
-          strokeOpacity,
-          points
-        } = attributes
+        const {model} = this.props
+        const {width, height, x, y, points} = model
+        const {fill, fillOpacity, strokeWidth, stroke, strokeOpacity,} = model.getNodeStyle()
         const transform = `matrix(1 0 0 1 ${x - width / 2} ${y - height / 2})`
         const pointsPath = points.map(point => point.join(',')).join(' ')
         return h(
@@ -70,13 +58,6 @@ export default function registerUser (lf) {
           y: data.y + 50
         }
         super(data, graphModel)
-        const lenght = 35
-        this.points = [
-          [lenght, 0],
-          [lenght * 2, lenght],
-          [lenght, lenght * 2],
-          [0, lenght]
-        ]
         // 右键菜单自由配置，也可以通过边的properties或者其他属性条件更换不同菜单
         this.menu = [
           {
@@ -91,7 +72,7 @@ export default function registerUser (lf) {
             text: 'edit',
             className: 'lf-menu-item',
             callback (node) {
-              lf.editNodeText(node.id)
+              lf.editText(node.id)
             }
           },
           {
@@ -102,6 +83,24 @@ export default function registerUser (lf) {
             }
           }
         ]
+      }
+      initNodeData(data) {
+        super.initNodeData(data)
+        const lenght = 35
+        this.points = [
+          [lenght, 0],
+          [lenght * 2, lenght],
+          [lenght, lenght * 2],
+          [0, lenght]
+        ]
+      }
+      // 自定义锚点样式
+      getAnchorStyle() {
+        const style = super.getAnchorStyle();
+        style.hover.r = 8;
+        style.hover.fill = "rgb(24, 125, 255)";
+        style.hover.stroke = "rgb(24, 125, 255)";
+        return style;
       }
     }
     return {

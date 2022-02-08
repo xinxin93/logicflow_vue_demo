@@ -29,19 +29,15 @@ export default function registerDownload(lf) {
         )
       }
       getShape () {
-        const attributes = this.getAttributes()
+        const {model} = this.props
+        const {width, height, x, y, points} = model
         const {
-          width,
-          height,
-          x,
-          y,
           fill,
           fillOpacity,
           strokeWidth,
           stroke,
           strokeOpacity,
-          points
-        } = attributes
+        } = model.getNodeStyle()
         const transform = `matrix(1 0 0 1 ${x - width / 2} ${y - height / 2})`
         const pointsPath = points.map(point => point.join(',')).join(' ')
         return h(
@@ -81,7 +77,11 @@ export default function registerDownload(lf) {
           [lenght, lenght * 2],
           [0, lenght]
         ]
-        this.stroke = NODE_COLOR
+      }
+      getNodeStyle() {
+        const style = super.getNodeStyle()
+        style.stroke = NODE_COLOR
+        return style
       }
     }
     return {

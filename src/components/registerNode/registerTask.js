@@ -2,14 +2,13 @@ export default function registerTask (lf) {
   lf.register('task', ({ RectNode, RectNodeModel, h }) => {
     class View extends RectNode {
       getShape() {
-        const style = this.getShapeStyle();
-        console.log(style);
-        const { width, height } = style;
-        const { x, y } = this.getAttributes();
+        const {model} = this.props
+        const {width, height, x, y} = model
         const position = {
           x: x - width / 2,
           y: y- height / 2,
         }
+        const style = model.getNodeStyle()
         return h("rect", {
           ...style,
           ...position,

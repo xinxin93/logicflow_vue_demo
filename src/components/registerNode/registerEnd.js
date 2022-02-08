@@ -2,13 +2,13 @@ export default function registerEnd (lf) {
   lf.register('end', ({ CircleNode, CircleNodeModel, h }) => {
     class EndNode extends CircleNode {
       getIconShape () {
-        const attributes = this.getAttributes()
+        const {model} = this.props
         const {
           x,
           y,
           width,
           height
-        } = attributes
+        } = model
         const stroke = '#404040'
         return h(
           'svg',
@@ -44,15 +44,9 @@ export default function registerEnd (lf) {
         )
       }
       getShape () {
-        const attributes = this.getAttributes()
-        const {
-          x,
-          y,
-          r,
-          fill,
-          stroke,
-          strokeWidth
-        } = attributes
+        const {model} = this.props
+        const {x, y, r} = model
+        const {fill, stroke, strokeWidth} = model.getNodeStyle()
         return h(
           'g',
           {
@@ -75,13 +69,28 @@ export default function registerEnd (lf) {
       }
     }
     class EndModel extends CircleNodeModel {
-      constructor (data, graphModel) {
+      initNodeData(data) {
         data.text = {
           value: (data.text && data.text.value) || '',
           x: data.x,
           y: data.y + 35
         }
-        super(data, graphModel)
+        super.initNodeData(data)
+        this.r = 20
+      }
+      // 自定义锚点样式
+      getAnchorStyle() {
+        const style = super.getAnchorStyle();
+        style.hover.r = 8;
+        style.hover.fill = "rgb(24, 125, 255)";
+        style.hover.stroke = "rgb(24, 125, 255)";
+        return style;
+      }
+      // 自定义节点outline
+      getOutlineStyle() {
+        const style = super.getOutlineStyle();
+        style.stroke = '#88f'
+        return style
       }
       getConnectedSourceRules () {
         const rules = super.getConnectedSourceRules()

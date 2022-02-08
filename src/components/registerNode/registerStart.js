@@ -2,11 +2,11 @@ export default function registerStart (lf) {
   lf.register('start', ({ CircleNode, CircleNodeModel, h }) => {
     class StartNode extends CircleNode {
       getLabelShape () {
-        const attributes = this.getAttributes()
+        const {model} = this.props
         const {
           x,
           y
-        } = attributes
+        } = model
         return h(
           'text',
           {
@@ -21,15 +21,16 @@ export default function registerStart (lf) {
         )
       }
       getShape () {
-        const attributes = this.getAttributes()
+        const {model} = this.props
         const {
           x,
           y,
           r,
+        } = model
+        const {
           fill,
           stroke,
-          strokeWidth
-        } = attributes
+          strokeWidth} = model.getNodeStyle()
         return h(
           'g',
           {
@@ -52,7 +53,8 @@ export default function registerStart (lf) {
       }
     }
     class StartModel extends CircleNodeModel {
-      constructor (data, graphModel) {
+      // 自定义节点形状属性
+      initNodeData(data) {
         data.text = {
           value: (data.text && data.text.value) || '',
           x: data.x,
@@ -60,7 +62,27 @@ export default function registerStart (lf) {
           dragable: false,
           editable: true
         }
-        super(data, graphModel)
+        super.initNodeData(data)
+        this.r = 20
+      }
+      // 自定义节点样式属性
+      getNodeStyle() {
+        const style = super.getNodeStyle()
+        return style
+      }
+      // 自定义锚点样式
+      getAnchorStyle() {
+        const style = super.getAnchorStyle();
+        style.hover.r = 8;
+        style.hover.fill = "rgb(24, 125, 255)";
+        style.hover.stroke = "rgb(24, 125, 255)";
+        return style;
+      }
+      // 自定义节点outline
+      getOutlineStyle() {
+        const style = super.getOutlineStyle();
+        style.stroke = '#88f'
+        return style
       }
       getConnectedTargetRules () {
         const rules = super.getConnectedTargetRules()

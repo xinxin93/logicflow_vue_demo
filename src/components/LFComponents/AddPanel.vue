@@ -41,7 +41,7 @@ export default {
         y: y + 150
       })
       const nextId = nextNode.id
-      lf.createEdge({sourceNodeId: id, targetNodeId: nextId})
+      lf.addEdge({sourceNodeId: id, targetNodeId: nextId})
       this.$emit('addNodeFinish')
     },
     $_addTempalte () {
@@ -73,9 +73,9 @@ export default {
         x: x + 300,
         y: y + 300
       })
-      lf.createEdge({sourceNodeId: id, targetNodeId: timeNode.id})
-      lf.createEdge({sourceNodeId: timeNode.id, targetNodeId: userNode.id})
-      lf.createEdge({
+      lf.addEdge({sourceNodeId: id, targetNodeId: timeNode.id})
+      lf.addEdge({sourceNodeId: timeNode.id, targetNodeId: userNode.id})
+      lf.addEdge({
         sourceNodeId: userNode.id,
         targetNodeId: endNode.id,
         endPoint: {x: x + 280, y: y + 150},
@@ -85,7 +85,7 @@ export default {
           y: y + 140
         }
       })
-      lf.createEdge({
+      lf.addEdge({
         sourceNodeId: userNode.id,
         targetNodeId: pushNode.id,
         text: {
@@ -94,7 +94,7 @@ export default {
           y: y + 230
         }
       })
-      lf.createEdge({sourceNodeId: pushNode.id, targetNodeId: endNode2.id, endPoint: {x: x + 280, y: y + 300}})
+      lf.addEdge({sourceNodeId: pushNode.id, targetNodeId: endNode2.id, endPoint: {x: x + 280, y: y + 300}})
       this.$emit('addNodeFinish')
     }
   }
