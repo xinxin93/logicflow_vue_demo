@@ -30,7 +30,7 @@ export default {
 <style>
 .node-panel {
   position: absolute;
-  top: 100px;
+  top: 50px;
   left: 50px;
   width: 70px;
   padding: 20px 10px;

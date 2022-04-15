@@ -11,6 +11,7 @@
       <el-button type="plain" size="small" @click="$_download">下载图片</el-button>
       <el-button type="plain" size="small" @click="$_catData">查看数据</el-button>
       <el-button v-if="catTurboData" type="plain" size="small" @click="$_catTurboData">查看turbo数据</el-button>
+      <el-button type="plain" size="small" @click="$_showMiniMap">查看缩略图</el-button>
     </el-button-group>
   </div>
 </template>
@@ -66,6 +67,10 @@ export default {
     },
     $_catTurboData(){
       this.$emit('catTurboData');
+    },
+    $_showMiniMap() {
+      const { lf } = this.$props;
+      lf.extension.miniMap.show(lf.graphModel.width - 150, 40)
     }
   }
 }

@@ -4,15 +4,7 @@ import Connect from './Connect.vue'
 export default function registerConnect (lf) {
   lf.register('connect', ({ HtmlNode, HtmlNodeModel }) => {
     class ConnectNode extends HtmlNode {
-      shouldUpdate() {
-        const { properties } = this.props.model
-        if (this.currrentProperties && this.currrentProperties !== '{}' && this.currrentProperties === JSON.stringify(properties)) return false;
-        this.currrentProperties = JSON.stringify(properties)
-        return true;
-      }
       setHtml(rootEl) {
-        // todo: 和react不一样，还没有找到合适的利用vue内置的diff算法来计算节点是否需要更新。
-        if (!this.shouldUpdate()) return;
         const { properties } = this.props.model;
         const el = document.createElement('div');
         rootEl.innerHTML = '';
