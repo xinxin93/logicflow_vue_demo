@@ -13,7 +13,7 @@
     <!-- 节点面板 -->
     <NodePanel :lf="lf" :nodeList="nodeList"></NodePanel>
     <!-- 画布 -->
-    <div id="LF-Turbo"></div>
+    <div id="LF-Turbo" ref="container"></div>
     <!-- 数据查看面板 -->
     <el-dialog
       title="数据"
@@ -68,7 +68,10 @@ export default {
       LogicFlow.use(Snapshot)
       // 使用bpmn插件，引入bpmn元素，这些元素可以在turbo中转换后使用
       LogicFlow.use(BpmnElement)
-      const lf = new LogicFlow({...this.config, container: document.querySelector('#LF-Turbo')})
+      const lf = new LogicFlow({
+        ...this.config,
+        container: this.$refs.container
+      })
       this.lf = lf
       // 设置边类型bpmn:sequenceFlow为默认类型
       lf.setDefaultEdgeType('bpmn:sequenceFlow')

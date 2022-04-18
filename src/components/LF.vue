@@ -11,7 +11,7 @@
     <!-- 节点面板 -->
     <NodePanel v-if="lf" :lf="lf" :nodeList="nodeList"></NodePanel>
     <!-- 画布 -->
-    <div id="LF-view"></div>
+    <div id="LF-view" ref="container"></div>
     <!-- 用户节点自定义操作面板 -->
     <AddPanel
       v-if="showAddPanel"
@@ -51,7 +51,7 @@
 <script>
 import LogicFlow from '@logicflow/core'
 // const LogicFlow = window.LogicFlow
-import { Menu, Snapshot } from '@logicflow/extension'
+import { Menu, Snapshot, MiniMap } from '@logicflow/extension'
 import '@logicflow/core/dist/style/index.css'
 import '@logicflow/extension/lib/style/index.css'
 import NodePanel from './LFComponents/NodePanel'
@@ -101,31 +101,8 @@ export default {
         keyboard: {
           enabled: true
         },
-        style: {
-          rect: {
-            radius: 6,
-          },
-          edgeText: { // 边文本样式
-            background: {
-              fill: '#fff'
-            }
-          },
-        },
         edgeTextDraggable: true,
         hoverOutline: false,
-        guards: {
-          beforeClone (data) {
-            console.log('beforeClone', data)
-            return true
-          },
-          beforeDelete (data) {
-            // 可以根据data数据判断是否允许删除，允许返回true,不允许返回false
-            // 文档： http://logic-flow.org/guide/basic/keyboard.html#%E5%A6%82%E4%BD%95%E9%98%BB%E6%AD%A2%E5%88%A0%E9%99%A4%E6%88%96%E8%80%85%E6%8B%B7%E8%B4%9D%E8%A1%8C%E4%B8%BA
-            console.log('beforeDelete', data)
-            // _this.$message('不允许删除', 'error')
-            return true
-          }
-        },
       },
       moveData: {},
       nodeList,
@@ -137,53 +114,16 @@ export default {
   methods: {
     $_initLf () {
       // 画布配置
-      
-      // 使用插件
-      LogicFlow.use(Menu)
-      LogicFlow.use(Snapshot)
-      const lf = new LogicFlow({...this.config, container: document.querySelector('#LF-view'),})
+      const lf = new LogicFlow({
+        ...this.config,
+        plugins: [
+          Menu,
+          MiniMap,
+          Snapshot
+        ],
+        container: this.$refs.container,
+      })
       this.lf = lf
-      // lf.setDefaultEdgeType('bpmn:sequenceFlow');
-      // 菜单配置文档：http://logic-flow.org/guide/extension/extension-components.html#%E8%8F%9C%E5%8D%95
-      // 重置，增加，节点自由配置(以user节点为示例)
-      // lf.setMenuConfig({
-      //   nodeMenu: [],
-      //   edgeMenu: []
-      // })
-      // lf.addMenuConfig({
-      //   nodeMenu: [
-      //     {
-      //       text: '分享',
-      //       callback () {
-      //         alert('分享成功！')
-      //       }
-      //     },
-      //     {
-      //       text: '属性',
-      //       callback (node) {
-      //         alert(`
-      //           节点id：${node.id}
-      //           节点类型：${node.type}
-      //           节点坐标：(x: ${node.x}, y: ${node.y})`
-      //         )
-      //       }
-      //     }
-      //   ],
-      //   edgeMenu: [
-      //     {
-      //       text: '属性',
-      //       callback (edge) {
-      //         alert(`
-      //           边id：${edge.id}
-      //           边类型：${edge.type}
-      //           边坐标：(x: ${edge.x}, y: ${edge.y})
-      //           源节点id：${edge.sourceNodeId}
-      //           目标节点id：${edge.targetNodeId}`
-      //         )
-      //       }
-      //     }
-      //   ]
-      // })
       // 设置主题
       lf.setTheme({
         circle: {
