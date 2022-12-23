@@ -1,0 +1,26 @@
+name: depoly demo
+on: [push]
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/master'
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Use node v16
+        uses: actions/setup-node@v1
+        with:
+          node-version: '16.16.0'
+
+      - name: load dependency
+        run: |
+          npm install
+      - name: generate static file
+        run: |
+          npm run build
+      - name: deploy to github pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          force_orphan: true
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
