@@ -8,8 +8,8 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
-    "@logicflow/core": "^1.1.12",
-    "@logicflow/extension": "^1.1.12",
+    "@logicflow/core": "^1.1.29",
+    "@logicflow/extension": "^1.1.29",
     "core-js": "^3.6.5",
     "vue": "^2.6.11",
     "vue-json-pretty": "1.7.1"

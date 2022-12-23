@@ -4,6 +4,15 @@ export default function registerPolyline (lf) {
       constructor (data, graphModel) {
         super(data, graphModel)
       }
+      setHovered (isHovered) {
+        super.setHovered(isHovered);
+        this.isAnimation = isHovered;
+      }
+      getEdgeAnimationStyle() {
+        const style = super.getEdgeAnimationStyle();
+        style.animationName = "lf_animate_dash"
+        return style;
+      }
     }
     return {
       view: PolylineEdge,

@@ -280,5 +280,11 @@ export default {
   margin-top: -30px;
   z-index: 3;
 }
+
+@keyframes lf_animate_dash {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
 </style>
 
