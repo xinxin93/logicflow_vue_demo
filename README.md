@@ -13,7 +13,10 @@
 
 画布：src/components/LF.vue  
 节点自定义： src/components/registerNode  
-节点面板：src/components/NodePanel.vue  
+节点面板：src/components/NodePanel.vue 
+
+## 线上预览
+https://xinxin93.github.io/logicflow_vue_demo/#/
 ## Project setup
 ```
 yarn install
